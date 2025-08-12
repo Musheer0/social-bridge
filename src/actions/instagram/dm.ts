@@ -26,7 +26,6 @@ export const SendDmFromComment = async(sender:string,recipient:string,content:an
             text:content
         }
     })
-    console.log(url,body)
     const headers = {
                   Authorization: `Bearer ${bearer}`,
             'Content-Type': 'application/json',
@@ -41,8 +40,7 @@ export const SendDmFromComment = async(sender:string,recipient:string,content:an
         return {success:true}
         }
         console.log('response faild')
-        const js = await response.json()
-        console.log(js)
+   
         return {success:false}
 
     } catch (error) {

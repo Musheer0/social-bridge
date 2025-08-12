@@ -1,12 +1,9 @@
-
 import React from 'react'
 
 const page = () => {
-
   return (
-    <div>
-      Page
-    
+    <div className='w-full h-screen '>
+
     </div>
   )
 }
