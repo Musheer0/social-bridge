@@ -54,9 +54,23 @@ export const SendDmFromMessage = async(sender:string,recipient:string,content:an
         recipient:{
             id:recipient
         },
-        message:{
-            text:content
-        }
+        "message": {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "button",
+        "text":"Hello From Social Bridge",
+        buttons:[
+
+{
+  "type": "postback",
+  "payload": "ORDER_PIZZA",
+  "title": "Hello",
+}
+        ]
+      }
+    }
+  }
     })
     const headers = {
                   Authorization: `Bearer ${bearer}`,

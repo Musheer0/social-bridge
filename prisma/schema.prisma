@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id            String    @id
+  id            String       @id
   name          String
   email         String
   emailVerified Boolean
@@ -24,6 +24,7 @@ model User {
   sessions      Session[]
   accounts      Account[]
   instagram     Instagram?
+  automations   Automation[]
 
   @@unique([email])
   @@map("user")
@@ -73,15 +74,41 @@ model Verification {
 
   @@map("verification")
 }
-model Instagram{
-  id String @id @default(uuid())
-  ig_id String 
+
+model Instagram {
+  id           String   @id @default(uuid())
+  ig_id        String   @unique
   access_token String
-  expiresAt  DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  user_id   String @unique
-  user      User @relation(fields: [user_id],references: [id],onDelete: Cascade)
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  user_id      String   @unique
+  user         User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
   @@index([ig_id])
-  
+}
+
+enum AutomationType {
+  POST
+  DM
+}
+
+enum templateType {
+  generic
+  text
+  button
+}
+
+model Automation {
+  id        String         @id @default(uuid())
+  user_id   String
+  type      AutomationType
+  keyword   String
+  template  templateType
+  reply     String?
+  message   Json
+  post_id   String?
+  user      User           @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
 }

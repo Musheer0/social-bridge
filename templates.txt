@@ -1,0 +1,59 @@
+    "message": {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [
+          {
+            "title": "Headphones",
+            "image_url": "https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "subtitle": "Best choice!",
+            "buttons": [
+              {
+                "type": "web_url",
+                "url": "https://example.com/product1",
+                "title": "Buy Now"
+              }
+            ]
+          },
+            {
+            "title": "Headphones",
+            "image_url": "https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+            "subtitle": "Best choice!",
+            "buttons": [
+              {
+                "type": "web_url",
+                "url": "https://example.com/product1",
+                "title": "Buy Now"
+              }
+            ]
+          },
+         
+        ]
+      }
+    }
+  }
+
+
+  ///postback
+  {
+  object: 'instagram',
+  entry: [
+    {
+      time: 1755022389737,
+      id: '17841461875852690',
+      messaging: [
+        {
+          sender: { id: '1112158507282086' },
+          recipient: { id: '17841461875852690' },
+          timestamp: 1755022385066,
+          postback: {
+            title: 'Hello',
+            payload: 'ORDER_PIZZA',
+            mid: 'aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDYxODc1ODUyNjkwOjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI3NjAzOTk2MjA1OTE0OTUwNTozMjM3NDQ0ODc4MDk1NTk3NjE0MDg1ODI1NTQ1MTYxOTMyOAZDZD'
+          }
+        }
+      ]
+    }
+  ]
+}

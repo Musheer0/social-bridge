@@ -1,4 +1,4 @@
-import { BlocksIcon, BrainCircuitIcon, CreditCardIcon, LayoutDashboardIcon, Link2Icon } from "lucide-react";
+import { BlocksIcon, BrainCircuitIcon, CreditCardIcon, LayoutDashboardIcon, Link2Icon, Network } from "lucide-react";
 
 export const analytics_links = [
     {
@@ -23,6 +23,11 @@ export const automation_links = [
         name:'Links',
         icon:Link2Icon,
         href:'/automations/links'
+    },
+    {
+        name:'Linked Accounts',
+        icon:Network,
+        href:'/linked-accounts'
     },
 ]
 export const plans_links = [

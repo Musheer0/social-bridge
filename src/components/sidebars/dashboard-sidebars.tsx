@@ -19,7 +19,7 @@ const DashboardSidebar = () => {
             <SidebarMenu>
                 <SidebarMenuItem className='flex items-center gap-2'>
                   <Image 
-                  src={'logo.svg'}
+                  src={'/logo.svg'}
                   width={30}
                   height={30}
                   alt='logo'

@@ -8,6 +8,7 @@ export const GET =(req:NextRequest)=>{
 }
 export const POST = async(req:NextRequest)=>{
     const body = await req.json();
+    console.dir(body,{depth:null})
     const entries:entries|null = body?.entry 
     if(!entries) return NextResponse.json({success:false, message:'entry not found'},{status:400});
     const entry = entries[0]
