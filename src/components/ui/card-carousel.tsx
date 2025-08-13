@@ -20,6 +20,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "./button"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import { useAutomationDraft } from "@/stores/use-automation-draft"
 
 interface CarouselProps {
   images?: { src: string; alt: string ,caption:string}[]
@@ -61,24 +62,16 @@ export const CardCarousel: React.FC<CarouselProps> = ({
     background: none;
   }
   `
-  const [selectedPost,setSelectedPost] = useState('');
+  const {PostId,setPostId} =useAutomationDraft()
+  const [selectedPost,setSelectedPost] = useState(PostId);
   const isSelected = (id:string)=> id===selectedPost
   return (
     <section className={cn(
-      "w-full",
+      "w-full h-full relative overflow-hidden",
       selectedPost && ''
     )}>
       <style>{css}</style>
-      <div className={cn(
-        "absolute w-full max-w-lg left-1/2  -translate-x-1/2 rounded-t-2xl bg-background px-10 border shadow-2xl flex items-center justify-center py-5  z-50 bottom-0 translate-y-full duration-300 transition-all ease-in-out",
-        selectedPost && 'translate-y-0 z-50'
-      )}>
-<Link href={'/automations/new/keyword'} className="w-full">
- <Button
- disabled={!selectedPost}
- className="px-5 rounded-full w-full">Next <ArrowRight/></Button>
-</Link>
-      </div>
+    
       <div className=" max-w-6xl  flex-1 rounded-2xl bg-background mx-auto ">
        
         <div className="relative  flex w-full flex-col  md:items-start md:gap-8 ">
@@ -142,7 +135,10 @@ export const CardCarousel: React.FC<CarouselProps> = ({
                     )}>
                      {isSelected(image.alt) &&  <div className="absolute top-0 left-0 w-full h-full bg-primary/50 pointer-events-none"></div>}
                      <Button
-                     onClick={()=>setSelectedPost(image.alt)}
+                     onClick={()=>{
+                      setSelectedPost(image.alt);
+                      setPostId(image.alt)
+                     }}
                      className={cn(
                       "absolute top-2 left-2 px-4 rounded-full",
                       isSelected(image.alt) && 'bg-secondary text-primary hover:bg-secondary/90'
@@ -175,6 +171,16 @@ export const CardCarousel: React.FC<CarouselProps> = ({
         </div>
       </div>
      
+       <div className={cn(
+        "absolute w-full max-w-lg left-1/2  -translate-x-1/2 rounded-t-2xl bg-background px-10 border shadow-2xl flex items-center justify-center py-5  z-50 bottom-0 translate-y-full duration-300 transition-all ease-in-out",
+        selectedPost && 'translate-y-0 z-[999999]'
+      )}>
+<Link href={'/automations/new/keyword'} className="w-full">
+ <Button
+ disabled={!selectedPost}
+ className="px-5 rounded-full w-full">Next <ArrowRight/></Button>
+</Link>
+      </div>
     </section>
   )
 }

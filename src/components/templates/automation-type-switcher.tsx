@@ -10,7 +10,7 @@ export function AutomationTypeSwitcher() {
   const types = ["DM", "COMMENT", ] as const
 
   return (
-    <div className="flex flex-col gap-4 w-full max-w-sm">
+    <div className="flex flex-col gap-4  max-w-sm">
   
 
       {/* Dropdown to change it */}

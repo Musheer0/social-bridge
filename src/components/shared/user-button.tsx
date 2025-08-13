@@ -20,7 +20,7 @@ if(isPending)
 if(data?.user)
  return (
   <DropdownMenu>
-    <DropdownMenuTrigger className='w-full  hover:bg-muted-foreground/5 cursor-pointer p-2 rounded-sm flex items-center justify-center group-data-[collapsible=icon]:p-0'>
+    <DropdownMenuTrigger className='w-fit  hover:bg-muted-foreground/5 cursor-pointer p-2 rounded-sm flex items-center justify-center group-data-[collapsible=icon]:p-0'>
           <div className='flex items-center w-full gap-2'>
         <Avatar>
             <AvatarFallback>AN</AvatarFallback>

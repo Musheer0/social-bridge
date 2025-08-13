@@ -13,7 +13,7 @@ export const CommentPreview = ({ text, username = "man_01e", timestamp = "2s" }:
   const { hoveredKeyword } = useHoverStore()
 
   return (
-    <div className="bg-secondary/80 dark:bg-secondary/40 rounded-2xl p-4 text-secondary-foreground min-h-[300px]">
+    <div className="bg-secondary/80 dark:bg-secondary/40 rounded-2xl p-4 text-secondary-foreground ">
       {/* Header */}
       <div className="flex items-center justify-center mb-6">
         <div className="w-8 h-0.5 bg-muted-foreground/30 rounded-full"></div>

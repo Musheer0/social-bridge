@@ -7,11 +7,13 @@ import { headers } from "next/headers";
 import prisma from "./prisma";
 
 export const ConnectInstagram = async(code:string)=>{
+    console.log(code)
     const session = await auth.api.getSession({
         headers:await headers()
     });
     if(!session) return {error:'un-authorized session',status:401}
     const short_code = await GetShortAccessToken(code);
+    console.log(short_code)
     const user:IGUser = await GetUserInfo(short_code.access_token)
     const access_token = await GetLongInstagramToken(short_code?.access_token);
     if(!access_token) return {error:'un-authorized',status:401}

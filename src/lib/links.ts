@@ -14,16 +14,11 @@ export const automation_links = [
         icon:BrainCircuitIcon,
         href:'/automations'
     },
-    {
-        name:'Templates',
-        icon:BlocksIcon,
-        href:'/automations/templates'
-    },
-    {
-        name:'Links',
-        icon:Link2Icon,
-        href:'/automations/links'
-    },
+    // {
+    //     name:'Templates',
+    //     icon:BlocksIcon,
+    //     href:'/automations/templates'
+    // },
     {
         name:'Linked Accounts',
         icon:Network,

@@ -1,4 +1,5 @@
 "use client"
+import Editor from '@/components/templates/editor'
 import GenericTemplate from '@/components/templates/generic-template'
 import TextTemplate from '@/components/templates/text-template'
 import { Button } from '@/components/ui/button'
@@ -9,7 +10,7 @@ import React from 'react'
 const page = () => {
   return (
     <div>
-      <GenericTemplate/>
+      <Editor/>
     </div>
   )
 }

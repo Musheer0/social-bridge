@@ -7,10 +7,10 @@ import GenericTemplate from './generic-template'
 
 const Editor = () => {
     const {TemplateType} = useAutomationDraft()
-
+      
 if(TemplateType==='button')
   return <TextTemplate/>
-else if( TemplateType==='generic')
+if( TemplateType==='generic')
       return <GenericTemplate/>
 
 }

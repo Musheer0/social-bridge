@@ -13,6 +13,8 @@ import { useHoverStore } from "@/lib/hover-store"
 import { useAutomationDraft } from "@/stores/use-automation-draft"
 import { AutomationTypeSwitcher } from "./automation-type-switcher"
 import TextTemplate from "./text-template"
+import { TemplateTypeSwitcher } from "./template-type-switcher"
+import PublishAutomation from "../shared/publish-automation"
 
 
 const GenericTemplate = () => {
@@ -69,12 +71,12 @@ const GenericTemplate = () => {
 
   return (
     <div className="w-full gap-3 flex-1 flex flex-col h-screen bg-gradient-to-br from-background to-muted/30">
-      <div className="header flex items-center justify-between w-full py-4 px-6 border-b border-border bg-background/80 backdrop-blur-sm">
+      <div className="header flex flex-wrap items-center justify-between w-full py-4 px-6 border-b border-border bg-background/80 backdrop-blur-sm">
         <div className="flex items-center gap-3">
           <div className="w-2 h-8 bg-primary rounded-full"></div>
           <p className="font-semibold text-lg text-foreground">Product template</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <Button
             variant={isPreviewMode ? "default" : "outline"}
             size={"sm"}
@@ -84,7 +86,10 @@ const GenericTemplate = () => {
             {isPreviewMode ? <EditIcon className="w-4 h-4" /> : <EyeIcon className="w-4 h-4" />}
             {isPreviewMode ? "Edit Mode" : "Preview Mode"}
           </Button>
+                <TemplateTypeSwitcher/>
                   <AutomationTypeSwitcher/>
+                            <PublishAutomation/>
+
         </div>
       </div>
 

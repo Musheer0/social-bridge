@@ -1,17 +1,16 @@
 // store/useProductTemplate.ts
 import { IGDmButton } from '@/types/ig-msg-templates'
-import { AutomationType } from '@prisma/client'
+import { AutomationType, templateType } from '@prisma/client'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-type TemplateType = 'generic' | 'button'
 
 type State = {
   Title?: string
   Text?: string
   ProductImage?: string
   Buttons: IGDmButton[]
-  TemplateType: TemplateType
+  TemplateType:templateType|null
   Keyword: string
   AutomationType: AutomationType | null
   PostId: string | null
@@ -25,10 +24,23 @@ type Actions = {
   addButton: (button: IGDmButton) => void
   deleteButton: (index: number) => void
   modifyButton: (index: number, newButton: IGDmButton) => void
-  setTemplateType: (type: TemplateType) => void
+  setTemplateType: (type: templateType) => void
   setKeyword: (keyword: string) => void
   setAutomationType: (type: AutomationType) => void
   setPostId: (postId: string | null) => void
+    resetAll: () => void
+
+}
+const defaultState: State = {
+  Title: 'Product Title',
+  Text: 'Hi from social bridge',
+  ProductImage:
+    'https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+  Buttons: [],
+  TemplateType: 'button',
+  Keyword: '',
+  AutomationType: null,
+  PostId: null,
 }
 
 export const useAutomationDraft = create<State & Actions>()(
@@ -38,7 +50,7 @@ export const useAutomationDraft = create<State & Actions>()(
       Text: 'Hi from social bridge',
       ProductImage:'https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
       Buttons: [],
-      TemplateType: 'generic',
+      TemplateType: 'button',
       Keyword: '',
       AutomationType: null,
       PostId: null,
@@ -62,6 +74,7 @@ export const useAutomationDraft = create<State & Actions>()(
       setKeyword: (Keyword) => set({ Keyword }),
       setAutomationType: (AutomationType) => set({ AutomationType }),
       setPostId: (PostId) => set({ PostId }),
+       resetAll: () => set(defaultState)
     }),
     {
       name: 'product-template-store', // localStorage key

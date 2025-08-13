@@ -6,7 +6,7 @@ import React from 'react'
 const page =async () => {
   const reels = await GetReels()
   return (
-    <div className='flex-1 h-full'>
+    <div className='flex-1 overflow-hidden max-h-screen  h-full'>
       <CardCarousel
         showNavigation
         showPagination

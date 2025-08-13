@@ -32,13 +32,13 @@ export const MessagePreview = ({
   isPreviewMode,
   onDeleteButton,
   onSetActiveButton,
-  isGenericTemplate,
   title,
   img,
   isKeywordPreviw
 }: MessagePreviewProps) => {
   const { hoveredKeyword, hoveredButton, hoveredText, setHoveredButton,hoverImg } = useHoverStore()
-  const {AutomationType} = useAutomationDraft()
+  const {AutomationType,TemplateType} = useAutomationDraft()
+  const isGenericTemplate = TemplateType==='generic'
   return (
     <div className={cn(
       "chat-container bg-muted/50 rounded-xl p-4 ",
@@ -58,11 +58,11 @@ export const MessagePreview = ({
         className={cn(
           "message max-w-[280px] text-sm bg-background text-foreground w-fit mr-auto rounded-2xl  shadow-sm border transition-all duration-200",
           hoveredText && "border-4 border-red-500",
-          !isGenericTemplate && 'rounded-bl-none '
+          !isGenericTemplate ? 'rounded-bl-none ':'w-[280px] '
         )}
       >
        {isGenericTemplate &&  <img src={img } className={cn(
-        "w-full bg-red-500 rounded-t-2xl",
+        "w-full bg-red-500 max-h-[300px] object-cover rounded-t-2xl",
         hoverImg && 'border-2 border-red-600'
        )} alt="product image" />}
        <div className="info px-4 py-3 ">
