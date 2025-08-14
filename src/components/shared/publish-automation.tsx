@@ -12,7 +12,7 @@ import { AutomationsPage } from '@/types/types'
 
 const PublishAutomation = () => {
   const query_client = useQueryClient()
-  const { Title, Text, ProductImage, Buttons, Keyword, AutomationType, PostId, TemplateType ,resetAll,poster} = useAutomationDraft()
+  const { Title, Text, ProductImage, Buttons, Keyword, AutomationType, PostId, TemplateType ,resetAll,post_url} = useAutomationDraft()
   const disabled = !Keyword || !AutomationType || !TemplateType 
   const router = useRouter()
   const [showConfetti, setShowConfetti] = useState(false)
@@ -27,7 +27,7 @@ const PublishAutomation = () => {
   setShowConfetti(true);
   localStorage.removeItem('product-template-store');
   resetAll();
-  router.push('/automations');
+  router.push('/automations?conffeti=true');
 
   // 1️⃣ Update automations list
   query_client.setQueryData<InfiniteData<AutomationsPage>>(
@@ -66,15 +66,7 @@ const PublishAutomation = () => {
 
   return (
     <>
-      {showConfetti && (
-        <Confetti
-          width={window.innerWidth}
-          height={window.innerHeight}
-          numberOfPieces={300}
-          recycle={false} // throw once
-          onConfettiComplete={() => setShowConfetti(false)} // hide AFTER it finishes falling
-        />
-      )}
+     
       <Button
         disabled={isPending || disabled}
         onClick={() => {
@@ -89,7 +81,7 @@ const PublishAutomation = () => {
             postId: PostId,
             description: Text,
             title: Title,
-            poster
+            post_url
           })
         }}
         className='px-4'>

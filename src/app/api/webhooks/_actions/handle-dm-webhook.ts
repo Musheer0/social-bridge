@@ -19,7 +19,10 @@ export const HandleDmWebhookEvent = async(dataarray:MessageWebhookEvent[]|null,i
     const automation = await prisma.automation.findFirst({
         where:{
            user_id:instagram.user_id,
-            keyword,
+            keyword:{
+                equals:keyword,
+                mode:'insensitive'
+            },
             type:'DM',
             disabled:false
         }

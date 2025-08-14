@@ -51,6 +51,21 @@ const Page = () => {
         </>  
         }
         </Button>
+        {/* <Button
+        onClick={()=>{
+          setIsLoading(true);
+          signIn.social({provider:'google'})
+        }}
+        disabled={isLoading}
+        size={'lg'} className='px-20 my-2 py-4 rounded-full' variant={'outline'}>
+          {isLoading ?
+        <Loader2Icon className='animate-spin'/>
+        :
+        <>
+        Continue with Google
+        </>  
+        }
+        </Button> */}
         <p className='max-w-[250px] text-xs text-center py-5'>
           By signing up, you agree to Social Bridge&apos;s
 Terms of Service and Privacy Policy

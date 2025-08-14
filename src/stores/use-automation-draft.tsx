@@ -14,7 +14,7 @@ type State = {
   Keyword: string
   AutomationType: AutomationType | null
   PostId: string | null,
-    poster?:string,
+    post_url?:string,
 
 }
 
@@ -44,7 +44,7 @@ const defaultState: State = {
   Keyword: '',
   AutomationType: null,
   PostId: null,
-  poster:undefined
+  post_url:undefined
 }
 
 export const useAutomationDraft = create<State & Actions>()(
@@ -58,7 +58,7 @@ export const useAutomationDraft = create<State & Actions>()(
       Keyword: '',
       AutomationType: null,
       PostId: null,
-      poster:undefined,
+      post_url:undefined,
       setTitle: (Title) => set({ Title }),
       setText: (Text) => set({ Text }),
       setProductImage: (ProductImage) => set({ ProductImage }),
@@ -81,7 +81,7 @@ export const useAutomationDraft = create<State & Actions>()(
       setPostId: (PostId) => set({ PostId }),
        resetAll: () => set(defaultState),
        setPoster(poster) {
-         set({poster:poster})
+         set({post_url:poster})
        },
     }),
     {

@@ -2,9 +2,12 @@
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, MessageSquare, Zap, Hash } from "lucide-react"
+import { Calendar, MessageSquare, Zap, Hash, InfoIcon } from "lucide-react"
 import { Automation } from "@prisma/client"
 import AutomationAction from "./automation-action"
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
+import { PopoverClose } from "@radix-ui/react-popover"
+import Link from "next/link"
 
 
 
@@ -80,6 +83,11 @@ export function AutomationCard({ automation, index }: AutomationCardProps) {
             <Badge variant="outline" className="border-border/50 bg-background/50 text-xs font-medium">
               {getTypeIcon(automation.type)}
               <span className="ml-1.5 capitalize">{automation.type}</span>
+            {automation.type!=='DM' &&
+               <Link href={automation.post_url||'/dashboard'} className="text-muted-foreground">
+                  (click here to view post)
+                  </Link>
+            }
             </Badge>
           </div>
 

@@ -18,7 +18,7 @@ export type createAutomationProps = {
   reply?:string,
   postId?:string|null,
   title?:string|null,
-  poster?:string
+  post_url?:string
 }
 
 const getTemplate = (props:createAutomationProps)=>{
@@ -68,7 +68,8 @@ export const CreateAutomation = async(props:createAutomationProps)=>{
         keyword:props.keyword,
         post_id:props.postId,
         reply:props.reply,
-        message:template
+        message:template,
+        post_url:props.post_url
     }
    });
    return automation

@@ -2,6 +2,7 @@
 import InitializeInstagram from '@/components/initializer/Initialize-instagram'
 import Provider from '@/components/providers/provider'
 import { ThemeProvider } from '@/components/providers/theme-provider'
+import ConfettiTrigger from '@/components/shared/confetti-trigger'
 import { Navbar } from '@/components/shared/navbar'
 import DashboardSidebar from '@/components/sidebars/dashboard-sidebars'
 import { SidebarProvider } from '@/components/ui/sidebar'
@@ -18,13 +19,15 @@ const Layout = ({children}:{children:React.ReactNode}) => {
      >
        <Provider>
         <SidebarProvider>
-          <DashboardSidebar/>
-          <InitializeInstagram/>
           <Toaster richColors swipeDirections={['right','left']}/>
+          <InitializeInstagram>
+          <DashboardSidebar/>
+          <ConfettiTrigger/>
          <main className='flex flex-1 flex-col w-full pb-20'>
            <Navbar/>
           {children}
          </main>
+         </InitializeInstagram>
         </SidebarProvider>
       </Provider>
      </ThemeProvider>

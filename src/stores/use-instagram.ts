@@ -4,6 +4,7 @@ type IGData = {
   id: string;
   createdAt: Date;
   ig_id: string;
+  expiresAt: Date;
 } | null;
 
 type InstagramStore = {

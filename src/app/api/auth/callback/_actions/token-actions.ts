@@ -19,7 +19,7 @@ export const GetLongInstagramToken = async (shortToken: string) => {
   const response = await fetch(`https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret=${process.env.IG_CLIENT_SECRET!}&access_token=${shortToken}`);
     const data = await response.json();
   if(data.access_token){
-    const date = new Date(data.expires_in * 1000);
+    const date = new Date(Date.now() + data.expires_in * 1000);
     return {
         token:data.access_token,
         exp:date
@@ -27,10 +27,10 @@ export const GetLongInstagramToken = async (shortToken: string) => {
   }
 }
 export const RefreshLongInstagramToken = async (longToken: string) => {
-  const response = await fetch( `${process.env.IG_BASE}/refresh_access_token?grant_type=ig_refresh_token&access_token=${longToken}`);
+  const response = await fetch( `https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=${longToken}`);
   const data = await response.json();
   if(data.access_token){
-    const date = new Date(data.expires_in * 1000);
+    const date = new Date(Date.now() + data.expires_in * 1000);
     return {
         token:data.access_token,
         exp:date

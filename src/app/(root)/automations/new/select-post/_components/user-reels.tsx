@@ -10,7 +10,7 @@ const UserReels =async () => {
       <CardCarousel
         showNavigation
         showPagination
-      images={reels.map((r)=>{return {src:r.thumbnail_url, alt:r.id,caption:r.caption}})}
+      images={reels.map((r)=>{return {src:r.thumbnail_url, alt:r.id,caption:r.caption,post_url:r.permalink}})}
       />
     </div>
   )

@@ -22,7 +22,7 @@ import Link from "next/link"
 import { useAutomationDraft } from "@/stores/use-automation-draft"
 
 interface CarouselProps {
-  images?: { src: string; alt: string ,caption:string}[]
+  images?: { src: string; alt: string ,caption:string,post_url?:string}[]
   autoplayDelay?: number
   showPagination?: boolean
   showNavigation?: boolean
