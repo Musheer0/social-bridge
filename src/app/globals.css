@@ -100,6 +100,7 @@
   --popover: oklch(0.2603 0 0);
   --popover-foreground: oklch(0.7348 0 0);
   --primary: oklch(0.4365 0.1044 156.7556);
+  --primary50: oklch(43.652% 0.10439 156.78 / 0.515);
   --primary-foreground: oklch(0.9213 0.0135 167.1556);
   --secondary: oklch(0.2603 0 0);
   --secondary-foreground: oklch(0.9851 0 0);
@@ -202,6 +203,38 @@
 body {
   letter-spacing: var(--tracking-normal);
 }
+::-webkit-scrollbar {
+  width: 5px; 
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary); 
+}
+
+* {
+  scrollbar-width: thin; 
+  scrollbar-color: var(--primary) transparent; 
+}
+::selection {
+  background: var(--primary);
+  color: var(--foreground);     
+}
+
+/* Firefox quirk — needs this for older versions */
+::-moz-selection {
+  background: var(--primary);
+  color: var(--foreground);  
+}
+
 
 @theme inline {
   --color-background: var(--background);

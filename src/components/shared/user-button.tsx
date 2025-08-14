@@ -3,16 +3,17 @@ import React from 'react'
 import {signOut, useSession} from '@/lib/auth-client'
 import { Skeleton } from '../ui/skeleton'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu'
 import { LogOutIcon } from 'lucide-react'
+import { useTheme } from 'next-themes'
 const UserButton = ({showName}:{showName?:boolean}) => {
-    
+    const {themes,setTheme,theme} = useTheme()
     const {isPending,data} = useSession()
 
 
 if(isPending)
   return (
-    <div className='flex items-center p-2 gap-2 w-full'>
+    <div className='flex  items-center p-2 gap-2 '>
         <Skeleton className='w-7 h-7 rounded-full'/>
        {showName &&  <Skeleton className='flex-1 h-4 '/>}
     </div>
@@ -30,16 +31,27 @@ if(data?.user)
     </div>
     </DropdownMenuTrigger >
     <DropdownMenuContent >
-        <DropdownMenuItem 
+     <DropdownMenuGroup>
+         <DropdownMenuItem 
         onClick={()=>signOut().then(()=>{window.location.reload()})}
-        className='text-destructive  flex items-center  cursor-pointer'>
+        className='text-red-500  flex items-center  cursor-pointer'>
             <DropdownMenuLabel
             
-            className='flex items-center justify-between w-full text-destructive gap-3 '>
-                Logout <LogOutIcon className='text-destructive'/>
+            className='flex items-center justify-between w-full text-red-500 gap-3 '>
+                Logout <LogOutIcon className='text-red-500'/>
             </DropdownMenuLabel>
         </DropdownMenuItem>
-      
+         <DropdownMenuItem
+         onClick={()=>{
+          setTheme(themes.filter((t)=>t!==theme)[0])
+         }}
+         className='px-4'>
+           <p>
+            Switch to {themes.filter((t)=>t!==theme)[0]} theme
+          </p>
+        </DropdownMenuItem>
+     </DropdownMenuGroup>
+         
         <DropdownMenuSeparator/>
         <DropdownMenuLabel >{data.user.email}</DropdownMenuLabel>
     </DropdownMenuContent>

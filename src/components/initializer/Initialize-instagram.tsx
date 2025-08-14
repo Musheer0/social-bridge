@@ -7,7 +7,7 @@ import { toast } from 'sonner'
 
 const InitializeInstagram = () => {
     const {isPending, data} = useSession();
-    const {isLoading,setIsLoading,setIG} = useInstagram()
+    const {setIsLoading,setIG} = useInstagram()
     const getInstagram = async()=>{
       if(isPending) return;
       toast.loading('connecting to instagrams',{id:'insta-loading'})

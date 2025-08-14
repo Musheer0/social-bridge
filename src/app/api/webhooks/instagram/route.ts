@@ -1,6 +1,6 @@
-import { sendDm } from "@/actions/instagram/dm";
-import { entries } from "@/types/ig-webhook-response";
 import { NextRequest, NextResponse } from "next/server"
+import { HandleDmWebhookEvent } from "../_actions/handle-dm-webhook";
+import { HandleCommentWebhookEvent } from "../_actions/handle-comment-webhook";
 
 export const GET =(req:NextRequest)=>{
     const search_params = req.nextUrl.searchParams;
@@ -8,37 +8,13 @@ export const GET =(req:NextRequest)=>{
 }
 export const POST = async(req:NextRequest)=>{
     const body = await req.json();
-    console.dir(body,{depth:null})
-    const entries:entries|null = body?.entry 
+    // console.dir(body,{depth:null})
+    const entries = body?.entry 
     if(!entries) return NextResponse.json({success:false, message:'entry not found'},{status:400});
     const entry = entries[0]
-    //if keyword triggered from comment 
-    if(entry?.changes){
-        //comment data
-        const change = entry.changes[0]
-        //comment
-        const value = change.value
-        //commented user
-        const sender = value.id
-        //creator id 
-        const user_id = entries[0].id
-        const response = await sendDm(change.field,sender,user_id,'eewfwefw',change.value.text)
-        return NextResponse.json(response,{status:response?.success? 200:400})
-    }
-    // if keyword triggered from dm
-    else if(entry?.messaging) {
-        //msg data
-        const msg = entry.messaging[0];
-        //if it was triggered by owner itself
-        const isReply = entry.id===msg.sender.id;
-        console.log(isReply)
-        if(isReply){
-            return NextResponse.json({success:true});}
-        const sender = msg.sender.id;
-        const recipient = msg.recipient.id;
-        const keyword = msg.message.text;
-         const response = await sendDm("messages",sender,recipient,'',keyword)
-        return NextResponse.json(response)
-    }
+    const isMessage =entry?.messaging
+    const isChanges = entry?.changes
+   await HandleCommentWebhookEvent(isChanges,entry.id)
+    await HandleDmWebhookEvent(isMessage,entry.id)
     return NextResponse.json({success:true})
 }

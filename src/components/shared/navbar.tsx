@@ -25,7 +25,7 @@ export const Navbar = () => {
                 </div>
                 <UserButton/>
    </nav>
-   <div className='fixed z-[9999] backdrop-blur-3xl bottom-0 md:hidden flex items-center justify-between left-0 w-full bg-muted-foreground/10 p-2'>
+   <div className='fixed z-[9999] backdrop-blur-3xl bottom-0 md:hidden flex items-center justify-between left-0 w-full bg-background/50 p-2'>
    {analytics_links.map((e,i)=>{
     const acitve = isActive(e.href)
     return(

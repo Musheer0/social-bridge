@@ -1,4 +1,4 @@
-import { BlocksIcon, BrainCircuitIcon, CreditCardIcon, LayoutDashboardIcon, Link2Icon, Network } from "lucide-react";
+import {  BrainCircuitIcon, CreditCardIcon, LayoutDashboardIcon, Network } from "lucide-react";
 
 export const analytics_links = [
     {

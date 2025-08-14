@@ -13,7 +13,9 @@ type State = {
   TemplateType:templateType|null
   Keyword: string
   AutomationType: AutomationType | null
-  PostId: string | null
+  PostId: string | null,
+    poster?:string,
+
 }
 
 type Actions = {
@@ -27,7 +29,8 @@ type Actions = {
   setTemplateType: (type: templateType) => void
   setKeyword: (keyword: string) => void
   setAutomationType: (type: AutomationType) => void
-  setPostId: (postId: string | null) => void
+  setPostId: (postId: string | null) => void,
+  setPoster:(poster:string)=>void
     resetAll: () => void
 
 }
@@ -41,6 +44,7 @@ const defaultState: State = {
   Keyword: '',
   AutomationType: null,
   PostId: null,
+  poster:undefined
 }
 
 export const useAutomationDraft = create<State & Actions>()(
@@ -54,6 +58,7 @@ export const useAutomationDraft = create<State & Actions>()(
       Keyword: '',
       AutomationType: null,
       PostId: null,
+      poster:undefined,
       setTitle: (Title) => set({ Title }),
       setText: (Text) => set({ Text }),
       setProductImage: (ProductImage) => set({ ProductImage }),
@@ -74,7 +79,10 @@ export const useAutomationDraft = create<State & Actions>()(
       setKeyword: (Keyword) => set({ Keyword }),
       setAutomationType: (AutomationType) => set({ AutomationType }),
       setPostId: (PostId) => set({ PostId }),
-       resetAll: () => set(defaultState)
+       resetAll: () => set(defaultState),
+       setPoster(poster) {
+         set({poster:poster})
+       },
     }),
     {
       name: 'product-template-store', // localStorage key

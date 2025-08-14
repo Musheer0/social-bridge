@@ -1,18 +1,12 @@
-import { GetReels } from '@/actions/instagram/reels'
-import { CardCarousel } from "@/components/ui/card-carousel"
+import React, { Suspense } from 'react'
+import UserReels from './_components/user-reels'
+import InstagramReelsLoader from './_components/loader'
 
-import React from 'react'
-
-const page =async () => {
-  const reels = await GetReels()
+const page = () => {
   return (
-    <div className='flex-1 overflow-hidden max-h-screen  h-full'>
-      <CardCarousel
-        showNavigation
-        showPagination
-      images={reels.map((r)=>{return {src:r.thumbnail_url, alt:r.id,caption:r.caption}})}
-      />
-    </div>
+    <Suspense fallback={<InstagramReelsLoader/>}>
+      <UserReels/>
+    </Suspense>
   )
 }
 

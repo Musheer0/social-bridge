@@ -1,6 +1,6 @@
 "use server"
 
-import { access_token } from "@/lib/constants";
+import { access_token, base_url } from "@/lib/constants";
 
 export const GetShortAccessToken = async(code:string)=>{
     const form = new FormData();
@@ -16,10 +16,8 @@ export const GetShortAccessToken = async(code:string)=>{
     return await response.json();
 }
 export const GetLongInstagramToken = async (shortToken: string) => {
-    console.log('llooooong')
   const response = await fetch(`https://graph.instagram.com/access_token?grant_type=ig_exchange_token&client_secret=${process.env.IG_CLIENT_SECRET!}&access_token=${shortToken}`);
     const data = await response.json();
-    console.log(data)
   if(data.access_token){
     const date = new Date(data.expires_in * 1000);
     return {
@@ -39,10 +37,24 @@ export const RefreshLongInstagramToken = async (longToken: string) => {
     }
   }
 }
-export const GetUserInfo = async(token:string)=>{
-  if(!token){
-    throw new Error('token is required')
+export const GetUserInfo = async (token: string) => {
+  if (!token) {
+    throw new Error("token is required");
   }
-  const response = await fetch(`https://graph.instagram.com/me?fields=id,username,account_type,profile_picture_url&access_token=${token}`);
-  return await response.json();
-}
+
+  const response = await fetch(
+    `${base_url}/me?fields=user_id,username&access_token=${token}   `,{
+      headers:{
+        'Autorization':`Bearer ${token}`
+      }
+    }
+  );
+  const data1 = await response.json();
+  console.log(data1)
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Instagram API error: ${errorText}`);
+  }
+
+  return data1
+};

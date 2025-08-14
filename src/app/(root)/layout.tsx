@@ -20,7 +20,7 @@ const Layout = ({children}:{children:React.ReactNode}) => {
         <SidebarProvider>
           <DashboardSidebar/>
           <InitializeInstagram/>
-          <Toaster/>
+          <Toaster richColors swipeDirections={['right','left']}/>
          <main className='flex flex-1 flex-col w-full pb-20'>
            <Navbar/>
           {children}

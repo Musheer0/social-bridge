@@ -25,7 +25,5 @@ export const GetReels = async()=>{
     if(!req.ok) return []
     const response = await req.json();
     const data:reel[] = response?.data||[]
-    console.log(data)
-    //TODO Clean data and send to front end
     return data
 }

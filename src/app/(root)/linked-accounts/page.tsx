@@ -1,6 +1,5 @@
 import ConnectInstagramCard from '@/components/sidebars/connect-instagram-card'
-import { Button } from '@/components/ui/button'
-import { InstagramIcon } from 'lucide-react'
+
 import React from 'react'
 
 const page = () => {

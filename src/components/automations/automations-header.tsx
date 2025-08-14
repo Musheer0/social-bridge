@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog"
 import { useAutomationDraft } from '@/stores/use-automation-draft'
 
-const AutomationHeader = () => {
+const AutomationHeader = ({hideBanner}:{hideBanner?:boolean}) => {
   const router = useRouter()
   const [showDialog, setShowDialog] = useState(false)
   const {AutomationType,PostId,Keyword,resetAll} = useAutomationDraft()
@@ -72,7 +72,7 @@ const AutomationHeader = () => {
 
   return (
     <>
-   {AutomationType &&
+   {(AutomationType && hideBanner) &&
     <div className='w-full flex items-center justify-between p-2'>
        <div className='flex-1 flex items-center gap-2 rounded-xl justify-between p-4 bg-destructive/50'>
          <h1 className='sm:text-xl  font-bold'>You have unsaved changes</h1>
@@ -89,7 +89,7 @@ const AutomationHeader = () => {
        </div>
     </div>
    }
-    <div className='w-full p-2 flex items-center justify-between'>
+    <div className='w-full p-2 py-4 flex items-center justify-between'>
       <h1 className='font-semibold text-lg'>Your Automations</h1>
       <Button onClick={handleCreateClick} className='px-4' variant={'outline'}>
         Create New <span className='md:flex hidden'>Automation</span> <PlusIcon />

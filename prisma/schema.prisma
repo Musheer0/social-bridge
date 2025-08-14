@@ -108,6 +108,11 @@ model Automation {
   reply     String?
   message   Json
   post_id   String?
+  disabled  Boolean @default(false)
+  no_of_times_used Int @default(0)
+  no_of_failed_times Int @default(0)
+  post_cover String?
+  
   user      User           @relation(fields: [user_id], references: [id], onDelete: Cascade)
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt

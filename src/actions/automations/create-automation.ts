@@ -1,4 +1,4 @@
-"use client"
+"use server"
 
 import { auth } from "@/auth"
 import prisma from "@/lib/prisma"
@@ -16,7 +16,9 @@ export type createAutomationProps = {
   img?:string,
   keyword:string,
   reply?:string,
-  postId?:string
+  postId?:string|null,
+  title?:string|null,
+  poster?:string
 }
 
 const getTemplate = (props:createAutomationProps)=>{
@@ -24,7 +26,7 @@ const getTemplate = (props:createAutomationProps)=>{
     const template_elements = props.template==='generic' ? {
         elements : [
             {
-                title:props.text,
+                title:props.title,
                   image_url: props.img,
                 subtitle: props.description,
                 buttons: props.buttons

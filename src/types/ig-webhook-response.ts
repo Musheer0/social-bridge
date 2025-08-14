@@ -27,7 +27,7 @@ export type entry = {
 export type entries = entry[]
 
 export type IGUser = {
-  id:string,
+  user_id:string,
   username:string,
   account_type:string,
   profile_picture_url:string

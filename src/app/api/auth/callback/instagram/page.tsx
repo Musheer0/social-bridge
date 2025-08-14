@@ -1,13 +1,12 @@
-import { ConnectInstagram } from '@/lib/login-user'
-import React from 'react'
+import React, { Suspense } from 'react'
+import Authenticate from './_components/auth'
+import IGAUTHLoader from '@/components/loaders/instagram-auth-loader'
 
-const page = async({searchParams}:{searchParams:Promise<{code:string}>}) => {
-    const {code} = await searchParams
-   await ConnectInstagram(code);
+const page = ({searchParams}:{searchParams:Promise<{code:string}>}) => {
   return (
-    <div>
-        <p>Loadingg</p>
-    </div>
+    <Suspense fallback={<IGAUTHLoader/>}>
+      <Authenticate searchParams={searchParams}/>
+    </Suspense>
   )
 }
 

@@ -13,10 +13,9 @@ export const ConnectInstagram = async(code:string)=>{
     });
     if(!session) return {error:'un-authorized session',status:401}
     const short_code = await GetShortAccessToken(code);
-    console.log(short_code)
-    const user:IGUser = await GetUserInfo(short_code.access_token)
     const access_token = await GetLongInstagramToken(short_code?.access_token);
     if(!access_token) return {error:'un-authorized',status:401}
+    const user:IGUser = await GetUserInfo(access_token.token)
     const instagram = await prisma.instagram.upsert({
         where:{
             user_id: session.user.id
@@ -24,7 +23,7 @@ export const ConnectInstagram = async(code:string)=>{
         update:{},
         create: {
             user_id:session.user.id,
-            ig_id:user.id,
+            ig_id:user.user_id,
             access_token:access_token.token,
             expiresAt:access_token?.exp,
         }

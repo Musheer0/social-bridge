@@ -12,7 +12,6 @@ import { CommentPreview } from "./comment-preview"
 import { useHoverStore } from "@/lib/hover-store"
 import { useAutomationDraft } from "@/stores/use-automation-draft"
 import { AutomationTypeSwitcher } from "./automation-type-switcher"
-import TextTemplate from "./text-template"
 import { TemplateTypeSwitcher } from "./template-type-switcher"
 import PublishAutomation from "../shared/publish-automation"
 

@@ -4,24 +4,25 @@ import { useAutomationDraft } from '@/stores/use-automation-draft'
 import { ArrowRight, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
-const types = [
-  {
-    name: "",
-    slug:"POST",
-    poster:'/comment.png'
-  },
-  {
-    name: 'When user sends me a message',
-    slug:"DM",
-    poster:'/dm.png'
-  },
-]
+// const types = [
+//   {
+//     name: "",
+//     slug:"POST",
+//     poster:'/comment.png'
+//   },
+//   {
+//     name: 'When user sends me a message',
+//     slug:"DM",
+//     poster:'/dm.png'
+//   },
+// ]
 const Page = () => {
   const {setAutomationType,AutomationType} = useAutomationDraft()
   return (
     <div className='flex relative  p-4 flex-col flex-1 w-full items-center gap-5'>
      
             <h1 className='text-center mx-auto font-bold text-2xl'>Select Your Automation Trigger</h1>
+            <h1 className='text-center mx-auto font-semibold  leading-none text-lg text-muted-foreground'>Tap one any one of the cards</h1>
       <div className="types flex-1   w-full flex items-center gap-2 flex-wrap sm:flex-row flex-col">
      
 
