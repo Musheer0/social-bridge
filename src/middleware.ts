@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 const pvt_routes = [
-	"/dashboard",'/automations'
+	"/dashboard",'/automations','/billing','linked-accounts'
 ]
 export async function middleware(request: NextRequest) {
 	const sessionCookie = getSessionCookie(request);

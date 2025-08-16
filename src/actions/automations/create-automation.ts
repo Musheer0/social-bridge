@@ -6,6 +6,7 @@ import { IGDmButton } from "@/types/ig-msg-templates"
 import { AutomationType, templateType } from "@prisma/client"
 import { BetterAuthError } from "better-auth"
 import { headers } from "next/headers"
+import { AutomationRateLimit } from "../user/rate-limitings/automation-rate-limit"
 
 export type createAutomationProps = { 
   template:templateType,
@@ -58,7 +59,11 @@ export const CreateAutomation = async(props:createAutomationProps)=>{
         headers:await headers()
     });
       if (!req?.user) throw new BetterAuthError("un authorized")
-
+    try {
+        await AutomationRateLimit(req.user.id) 
+    } catch (error) {
+        return {error:'Too many requests'}
+    }
    const template = getTemplate(props);
    const automation = await prisma.automation.create({
     data:{

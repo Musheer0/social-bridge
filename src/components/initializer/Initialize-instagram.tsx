@@ -19,7 +19,6 @@ const InitializeInstagram = ({ children }: PropsWithChildren) => {
       setIsLoading(true);
 
       const ig = await GetUserInstagram();
-      console.log(ig)
       toast.dismiss("insta-loading");
 
       if (!ig) {

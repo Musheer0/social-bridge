@@ -9,22 +9,45 @@ import { useAutomationDraft } from '@/stores/use-automation-draft'
 import Confetti from "react-confetti";
 import { useRouter } from 'next/navigation'
 import { AutomationsPage } from '@/types/types'
+import { useUser } from '@/stores/use-user'
 
 const PublishAutomation = () => {
   const query_client = useQueryClient()
+  const {user} = useUser()
   const { Title, Text, ProductImage, Buttons, Keyword, AutomationType, PostId, TemplateType ,resetAll,post_url} = useAutomationDraft()
   const disabled = !Keyword || !AutomationType || !TemplateType 
   const router = useRouter()
-  const [showConfetti, setShowConfetti] = useState(false)
+  const automations = query_client.getQueryData<InfiniteData<AutomationsPage>>(['automations', 'user-automations'])
+  const isRateLimited = (() => {
+  if (!automations || !user) return false;
+
+  const todayAutomations = automations.pages[0].automations.filter(a => {
+    const createdDate = new Date(a.createdAt);
+    const today = new Date();
+    return (
+      createdDate.getFullYear() === today.getFullYear() &&
+      createdDate.getMonth() === today.getMonth() &&
+      createdDate.getDate() === today.getDate()
+    );
+  });
+  console.log(todayAutomations)
+  // free users limited to 1 automation per day
+  return user.plan === 'free' && todayAutomations.length >= 2;
+})();
 
   const { mutate, isPending, isSuccess } = useMutation({
     mutationFn: CreateAutomation,
     onError: () => {
-      toast.error('error publishing your automation, try again')
+      toast.error('error publishing your automation, try again');
+     
     },
    onSuccess: (data) => {
+    if('error' in data){
+      toast.error('you have reached your limit for today')
+         router.push('/automations');
+        return;
+    }
   toast.success('published ');
-  setShowConfetti(true);
   localStorage.removeItem('product-template-store');
   resetAll();
   router.push('/automations?conffeti=true');
@@ -68,7 +91,7 @@ const PublishAutomation = () => {
     <>
      
       <Button
-        disabled={isPending || disabled}
+        disabled={isPending || disabled||isRateLimited }
         onClick={() => {
           if (disabled) return;
           mutate({
@@ -90,7 +113,7 @@ const PublishAutomation = () => {
             <Loader2Icon className='animate-spin' /> Publishing
           </>
         ) : (
-          <>{isSuccess ? 'Published' : 'Publish'}</>
+          <>{isSuccess ? 'Published' : isRateLimited ? "you have reached today's limit":'Publish'}</>
         )}
       </Button>
     </>

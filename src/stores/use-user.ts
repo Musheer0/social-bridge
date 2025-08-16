@@ -1,3 +1,4 @@
+import { plan_role } from "@prisma/client";
 import { create } from "zustand";
 
 type User = {
@@ -8,6 +9,7 @@ type User = {
   createdAt: Date;
   updatedAt: Date;
   image?: string | null;
+  plan:"free"|plan_role
 };
 
 type UserStore = {

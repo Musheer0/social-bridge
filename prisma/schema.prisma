@@ -25,11 +25,25 @@ model User {
   accounts      Account[]
   instagram     Instagram?
   automations   Automation[]
-
+  plan          Plan?
   @@unique([email])
   @@map("user")
 }
 
+enum plan_role{
+  pro
+  max
+}
+model Plan {
+  id String @id @default(uuid())
+  userId    String @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      plan_role @default(pro)
+   createdAt DateTime
+  updatedAt DateTime
+  transaction_id String
+  
+}
 model Session {
   id        String   @id
   expiresAt DateTime

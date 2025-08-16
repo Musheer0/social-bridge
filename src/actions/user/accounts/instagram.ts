@@ -3,6 +3,7 @@
 import { RefreshLongInstagramToken } from "@/app/api/auth/callback/_actions/token-actions";
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
+import { plan_role } from "@prisma/client";
 import { headers } from "next/headers";
 
 export const GetUserInstagram = async () => {
@@ -14,7 +15,7 @@ export const GetUserInstagram = async () => {
   }
 
   const instagram = await prisma.instagram.findUnique({
-    where: { user_id: session.user.id },
+    where: { user_id:session.user.id },
     select: {
       id: true,
       ig_id: true,
@@ -23,13 +24,21 @@ export const GetUserInstagram = async () => {
       access_token: true
     }
   });
-
+  const plan = await prisma.plan.findUnique({
+    where:{
+      userId:session.user.id
+    },
+    select:{
+      role:true
+    }
+  })
+  const updated_user = {...session.user,plan:plan?.role||'free' as  plan_role|'free'}
   if (!instagram) return {
         id: null,
         ig_id: null,
         createdAt: null,
         expiresAt: null,
-        user: session.user
+        user:updated_user
       
   }
       
@@ -54,7 +63,7 @@ export const GetUserInstagram = async () => {
         ig_id: instagram.ig_id,
         createdAt: instagram.createdAt,
         expiresAt: refreshed.exp,
-        user: session.user
+        user:updated_user
       };
     }
   }
@@ -64,6 +73,6 @@ export const GetUserInstagram = async () => {
     ig_id: instagram.ig_id,
     createdAt: instagram.createdAt,
     expiresAt: instagram.expiresAt,
-    user: session.user
+    user:updated_user
   };
 };
